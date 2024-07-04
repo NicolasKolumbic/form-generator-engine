@@ -1,0 +1,17 @@
+<div class="custom-dropdown">
+    <button (click)="open()" class="custom-dropdown__dropdown-button">
+      <ng-container *ngIf="selectedValue">
+        {{ selectedValue['key'] }}
+      </ng-container>
+      <ng-container *ngIf="!selectedValue">
+        {{ question.label }}
+      </ng-container> 
+    </button>
+    <ul class="dropdown-content" [class.show]="isShow">
+      <li *ngFor="let option of options" class="dropdown-content__item">
+        <button (click)="selectOption(option)" class="block w-100 text-left">
+          {{ option['key'] }}
+        </button>
+      </li>
+    </ul>
+  </div>
