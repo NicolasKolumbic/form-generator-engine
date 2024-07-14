@@ -1,4 +1,4 @@
-<div class="custom-dropdown">
+<div class="custom-dropdown" [@showHide]="isShow">
     <button (click)="open()" class="custom-dropdown__dropdown-button">
       <ng-container *ngIf="selectedValue">
         {{ selectedValue['key'] }}
@@ -7,7 +7,7 @@
         {{ question.label }}
       </ng-container> 
     </button>
-    <ul class="dropdown-content" [class.show]="isShow">
+    <ul class="dropdown-content" [class.show]="isShowDropdownMenu">
       <li *ngFor="let option of options" class="dropdown-content__item">
         <button (click)="selectOption(option)" class="block w-100 text-left">
           {{ option['key'] }}

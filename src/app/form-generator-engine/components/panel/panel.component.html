@@ -1,6 +1,7 @@
-<div>
-  <h4 *ngIf="panel.title">{{ panel.title }}</h4>
+<div [@showHide]="isShow">
+  <h4 *ngIf="title">{{ title }}</h4>
+  <h1>Panel</h1>
   <div>
-    <ng-container *fgeDynamicContainer></ng-container>
+    <ng-template appComponentHost></ng-template>
   </div>
 </div>

@@ -1,6 +1,6 @@
-<div class="form-viewer">
+<div class="form-viewer" [@showHide]="isShow" (@showHide.done)="hideFromView($event)">
     <h1 *ngIf="title">{{ title }}</h1>
   <div>
-    <ng-container *fgeDynamicContainer></ng-container>
+    <ng-template appComponentHost></ng-template>
   </div>
 </div>

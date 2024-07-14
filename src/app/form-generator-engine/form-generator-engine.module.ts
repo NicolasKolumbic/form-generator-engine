@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
+import { EnvironmentInjector, inject, ModuleWithProviders, NgModule, Provider } from '@angular/core';
 import { FormViewerComponent } from './components/form-viewer/form-viewer.component';
 import { Setting } from './services/setting';
 import { FormSessionService } from './services/form-session.service';
@@ -8,8 +8,6 @@ import { PanelComponent } from './components/panel/panel.component';
 import { configurationSetter } from './helpers/configuration-setter';
 import { SchemaFactoryService } from './services/schema-factory.service';
 import { QuestionComponent } from './components/question/question.component';
-import { DynamicContainerDirective } from './directives/dynamic-container.directive';
-import { FactoryComponent } from './components/factory/factory.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -17,21 +15,23 @@ import { SwitchDefaultComponent } from './components/switch-default/switch-defau
 import { CheckboxDefaultComponent } from './components/checkbox-default/checkbox-default.component';
 import { TextfieldDefaultComponent } from './components/textfield-default/textfield-default.component';
 import { ComboboxDefaultComponent } from './components/combobox-default/combobox-default.component';
+import { ComponentHostDirective } from './directives/container.directive';
+import { TemplateFactoryComponent } from './components/template-factory/template-factory.component';
 
 @NgModule({
   declarations: [
+    ComponentHostDirective,
     FormViewerComponent,
     FormComponent,
     PageComponent,
     PanelComponent,
     QuestionComponent,
-    FactoryComponent,
     FormViewerComponent,
-    DynamicContainerDirective,
     SwitchDefaultComponent,
     CheckboxDefaultComponent,
     TextfieldDefaultComponent,
-    ComboboxDefaultComponent
+    ComboboxDefaultComponent,
+    TemplateFactoryComponent
   ],
   imports: [
     CommonModule,

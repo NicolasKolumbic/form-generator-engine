@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { HtmlFormControl, Metadata } from '../abstractions';
 
 export abstract class BaseElement implements Metadata, HtmlFormControl {
@@ -5,11 +6,16 @@ export abstract class BaseElement implements Metadata, HtmlFormControl {
   #name: string;
   #title: string;
   #isInjected: boolean;
+  #isVisible: boolean;
 
-  constructor(name: string, title?: string, metadata?: JSONObject) {
+  #visibilityChanged: Subject<boolean>;
+
+  constructor(name: string, isVisible: boolean, title?: string, metadata?: JSONObject) {
     this.#name = name ?? crypto.randomUUID();
+    this.#isVisible = isVisible === undefined;
     this.#title = title ?? '';
     this.#isInjected = false;
+    this.#visibilityChanged = new Subject();
     if (metadata !== undefined) {
       this.#metadata = new Map<string, JSONValue | null>();
       Object.keys(metadata).forEach((key: string) => {
@@ -24,6 +30,14 @@ export abstract class BaseElement implements Metadata, HtmlFormControl {
 
   get title(): string {
     return this.#title;
+  }
+
+  get isVisible(): boolean {
+    return this.#isVisible;
+  }
+
+  get visibilityChanged(): Subject<boolean> {
+    return this.#visibilityChanged;
   }
 
   hasMetadata(): boolean {
@@ -67,5 +81,15 @@ export abstract class BaseElement implements Metadata, HtmlFormControl {
       });
     });
     return schema;
+  }
+
+  show(): void {
+    this.#isVisible = true;
+    this.#visibilityChanged.next(this.#isVisible);
+  }
+
+  hide(): void {
+    this.#isVisible = false;
+    this.#visibilityChanged.next(this.#isVisible);
   }
 }

@@ -49,11 +49,12 @@ export class QuestionControl
       maxLength,
       minLength,
       pattern,
-      placeholder
+      placeholder,
+      isVisible
     }: QuestionControlSchema,
     parent: Question
   ) {
-    super(name, title, metadata);
+    super(name, isVisible, title, metadata);
     this.#text = text ?? '';
     this.#componentType = componentType;
     this.#name = name ?? crypto.randomUUID();

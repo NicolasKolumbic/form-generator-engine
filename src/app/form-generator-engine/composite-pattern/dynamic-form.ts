@@ -31,8 +31,26 @@ export class DynamicForm
   constructor(form: FormSchema) {
     super(form, null);
     this.schema = form;
-    this.elements = form.elements.map((page: PageSchema) => new Page(page, this));
     this.update = new Subject<UpdatedForm>();
+    this.elements = [];
+    
+    form.elements.forEach((pageSchema: PageSchema, index: number) => {
+      const page = new Page(pageSchema, this);
+
+      if (index > 0) {
+        page.setPrevious(this.elements[index - 1])
+        const previousNode = this.elements[index - 1];
+        previousNode.setNext(page);
+      }
+
+      if (index === 0) {
+        this.setChild(page)
+      }
+
+      this.elements.push(page);
+    });
+    
+    
   }
 
   getValue(): JSONValue {
@@ -52,6 +70,7 @@ export class DynamicForm
       page: question!.parent!.parent!.parent!.getSchema(['name']),
       panel: question!.parent!.parent!.getSchema(['name']),
       questionMetadata: question.metadata(),
+      form: this
     } as UpdatedForm);
   }
 
@@ -65,9 +84,9 @@ export class DynamicForm
   checkAndUpdate(): void {
     this.elements.forEach((page: Page) => {
       if (!page.hasInjected()) {
-        this.component.instance.createComponent(page);
+        /*this.component.instance.createComponent(page);
         this.component.instance.appendToView(page);
-        this.component.changeDetectorRef.markForCheck();
+        this.component.changeDetectorRef.markForCheck();*/
       }
       page.checkAndUpdate();
     });

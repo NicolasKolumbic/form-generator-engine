@@ -1,3 +1,4 @@
+import { TreeDataStructure } from '@form-generator-engine/composite-pattern/tree-data-structure';
 import {
     PageSchema,
     PanelSchema,
@@ -7,6 +8,7 @@ import {
   } from '../abstractions';
   import { ContainerSchema } from '../abstractions/container-schema';
   import {
+    BaseElement,
     DynamicForm,
     Page,
     Panel,
@@ -15,34 +17,34 @@ import {
   } from '../composite-pattern';
   import { Controls } from './controls.enum';
   
-  export function factory<TElement, TParent>(
+  export function factory(
     element: Schema,
-    parent: TParent
-  ): TElement | undefined {
-    const type = (element as ContainerSchema<Schema>).componentType;
+    parent: BaseElement
+  ): TreeDataStructure {
+    const type: Controls = (element as ContainerSchema<Schema>).componentType;
     let instance;
     switch (type) {
       case Controls.Page:
         instance = new Page(
           element as PageSchema,
           parent as DynamicForm
-        ) as TElement;
+        );
         break;
       case Controls.Panel:
-        instance = new Panel(element as PanelSchema, parent as Page) as TElement;
+        instance = new Panel(element as PanelSchema, parent as Page);
         break;
       case Controls.Question:
         instance = new Question(
           element as QuestionSchema,
           parent as Panel
-        ) as TElement;
+        );
         break;
       default:
         instance = new QuestionControl(
           element as QuestionControlSchema,
           parent as Question
-        ) as TElement;
+        );
         break;
     }
-    return instance;
+    return instance as TreeDataStructure;
   }

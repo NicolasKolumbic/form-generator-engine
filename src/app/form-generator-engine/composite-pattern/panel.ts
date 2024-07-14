@@ -19,7 +19,7 @@ export class Panel
   type: Controls;
 
   constructor(schema: PanelSchema, parent: Page) {
-    super(schema);
+    super(schema, parent);
     this.type = Controls.Panel;
   }
 
@@ -31,9 +31,9 @@ export class Panel
   checkAndUpdate(): void {
     this.elements.forEach((question: Question) => {
       if (!question.hasInjected() && this.hasInjected()) {
-        this.component.instance.createComponent(question);
+        /*this.component.instance.createComponent(question);
         this.component.instance.appendToView(question);
-        this.component.changeDetectorRef.markForCheck();
+        this.component.changeDetectorRef.markForCheck();*/
       }
 
       question.checkAndUpdate();

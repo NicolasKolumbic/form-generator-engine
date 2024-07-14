@@ -26,5 +26,6 @@ export class AppComponent implements OnInit {
 
   updateForm(updatedValue: UpdatedForm) {
     console.log(updatedValue);
+    updatedValue.form.hide();
   }
 }

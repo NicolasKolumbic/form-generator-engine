@@ -1,34 +1,40 @@
-import { Container, Schema, ContainerSchema, BaseElement, FormElement } from '../abstractions';
+import { Container, Schema, ContainerSchema, FormElement, BaseElement as BaseElementInterface } from '../abstractions';
+import { BaseElement } from './base-element';
 import { TreeDataStructure } from './tree-data-structure';
 import { factory } from '@form-generator-engine/helpers/factory-function';
 
 export abstract class ElementManager<TChild, TParent, TSchema>
-  extends TreeDataStructure<TChild>
+  extends TreeDataStructure
   implements Container<TChild, TParent>
 {
   elements: TChild[];
   parent?: TParent;
 
   constructor(schema: TSchema, parent?: TParent) {
-    const { name, elements, metadata, title } =
+    const { name, elements, metadata, title, isVisible } =
       schema as ContainerSchema<Schema>;
-    super(name, title, metadata);
+    super(name, isVisible, title, metadata, );
     this.elements = [];
     this.parent = parent;
+    
     elements.forEach((element: Schema, index: number) => {
-      const elementNode = factory<TChild, TParent>(
+      const elementNode = factory(
         element as Schema,
-        this as unknown as TParent
-      ) as FormElement<TChild, TParent>;
+        this 
+      );
 
-      if (index > 0) {
-        elementNode.setPrevious(this.elements[index - 1]);
+      if (elementNode && index > 0) {
+        elementNode.setPrevious(this.elements[index - 1] as BaseElement);
       }
 
       if (index < elements.length && index > 0) {
         (this.elements[index - 1] as FormElement<TChild, TParent>).setNext(
           elementNode as TChild
         );
+      }
+
+      if (index === 0) {
+        this.setChild(elementNode as BaseElement);
       }
 
       this.elements.push(elementNode as TChild);

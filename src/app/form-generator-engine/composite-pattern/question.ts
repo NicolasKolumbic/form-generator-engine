@@ -39,10 +39,10 @@ export class Question
   checkAndUpdate(): void {
     this.elements.forEach((control: QuestionControl) => {
       if (!control.hasInjected() && this.hasInjected()) {
-        this.component.instance.createComponent(control);
+        /*this.component.instance.createComponent(control);
         this.component.instance.transform(control);
         this.component.instance.appendToView(control);
-        this.component.changeDetectorRef.markForCheck();
+        this.component.changeDetectorRef.markForCheck();*/
       }
     });
   }

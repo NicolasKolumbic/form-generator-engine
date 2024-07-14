@@ -1,41 +1,46 @@
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
-  ModuleWithProviders,
-  OnChanges,
   Output,
-  Provider,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import {
+  DynamicComponent,
   FormSchema,
   UpdatedForm,
 } from '@form-generator-engine/abstractions';
 import { DynamicForm } from '@form-generator-engine/composite-pattern';
 import { FormSessionService } from '@form-generator-engine/services/form-session.service';
-import { Controls } from '@form-generator-engine/helpers';
-import { FactoryComponent } from '../factory/factory.component';
-
+import { Controls, ShowHide } from '@form-generator-engine/helpers';
+import { ComponentHostDirective } from '@form-generator-engine/directives/container.directive';
+import { FactoryResolverService } from '@form-generator-engine/services/factory-resolver.service';
+import { FactoryComponent } from '@form-generator-engine/abstractions/factory-component';
+import { showHideAnimation } from '@form-generator-engine/helpers/animation-show-hide';
 
 @Component({
   selector: 'fge-form-viewer',
-
   templateUrl: './form-viewer.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [FactoryResolverService],
+  animations: [showHideAnimation],
 })
-export class FormViewerComponent extends FactoryComponent implements AfterViewInit, OnChanges {
+export class FormViewerComponent implements FactoryComponent {
   @Input() source: JSONValue | null = null;
   @Output() updateForm: EventEmitter<UpdatedForm> = new EventEmitter();
 
+  @ViewChild(ComponentHostDirective) container!: ComponentHostDirective;
+
   title?: string;
   initialized?: boolean;
+  isShow: ShowHide = ShowHide.Show;
 
-  constructor(private readonly formSession: FormSessionService) {
-    super();
-  }
+  constructor(
+    private readonly formSession: FormSessionService,
+    private readonly factoryResolverService: FactoryResolverService
+  ) {}
+  
+  transform<TComponent>(_element: DynamicComponent<TComponent>): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['source'] && !changes['source'].firstChange) {
@@ -86,7 +91,13 @@ export class FormViewerComponent extends FactoryComponent implements AfterViewIn
         this.updateForm.emit(value);
       });
 
-      this.generateView(this.formSession.form);
+      this.formSession.form.visibilityChanged.subscribe((visibility: boolean) => {
+        this.isShow = visibility ? ShowHide.Show : ShowHide.Hide;
+      });
+
+      this.factoryResolverService.name = "form-viewer";
+      this.factoryResolverService.container = this.container;
+      this.factoryResolverService.generateView(this.formSession.form, this.transform);
     }
   }
 
@@ -97,5 +108,9 @@ export class FormViewerComponent extends FactoryComponent implements AfterViewIn
     ) {
       this.formSession.form.checkAndUpdate();
     }
+  }
+
+  hideFromView(arg: any) {
+    console.log(arguments);
   }
 }

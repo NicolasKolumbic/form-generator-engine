@@ -34,9 +34,9 @@ export class Page
   checkAndUpdate(): void {
     this.elements.forEach((panel: Panel) => {
       if (!panel.hasInjected()) {
-        this.component.instance.createComponent(panel);
+        /*this.component.instance.createComponent(panel);
         this.component.instance.appendToView(panel);
-        this.component.changeDetectorRef.markForCheck();
+        this.component.changeDetectorRef.markForCheck();*/
       }
       panel.checkAndUpdate();
     });

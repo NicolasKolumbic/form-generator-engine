@@ -1,6 +1,6 @@
 import { Type } from '@angular/core';
 import { QuestionBaseComponent } from './question-base-component';
-import { FactoryComponent } from '../components/factory/factory.component';
+import { FactoryComponent } from './factory-component';
 
 export interface ControlsSetting {
   form?: Type<FactoryComponent>;

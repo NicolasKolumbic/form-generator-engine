@@ -1,16 +1,18 @@
 import { BaseElement } from './base-element';
 
-export abstract class TreeDataStructure<TChild> extends BaseElement {
-  #left: TChild | undefined;
-  #right: TChild | undefined;
+export abstract class TreeDataStructure extends BaseElement {
+  #left: BaseElement | undefined;
+  #right: BaseElement | undefined;
+  #child: BaseElement | undefined;
 
   constructor(
     name: string,
+    isVisible: boolean,
     title?: string,
     metadata?: JSONObject,
-    left?: TChild
+    left?: BaseElement
   ) {
-    super(name, title, metadata);
+    super(name, isVisible,title, metadata);
     this.#left = left;
   }
 
@@ -22,13 +24,22 @@ export abstract class TreeDataStructure<TChild> extends BaseElement {
     return this.#right !== undefined;
   }
 
-  setNext(nextChild: TChild): TreeDataStructure<TChild> {
+  setNext(nextChild: BaseElement): TreeDataStructure {
     this.#right = nextChild;
     return this;
   }
 
-  setPrevious(previousChild: TChild): TreeDataStructure<TChild> {
+  setPrevious(previousChild: BaseElement): TreeDataStructure {
     this.#left = previousChild;
+    return this;
+  }
+
+  hasChild(): boolean {
+    return this.#child !== undefined;
+  }
+
+  setChild(child: BaseElement): TreeDataStructure {
+    this.#child = child;
     return this;
   }
 }

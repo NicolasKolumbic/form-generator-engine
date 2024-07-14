@@ -1,6 +1,7 @@
 <div class="mt-4" [@showHide]="isShow">
   <p class="text-lg font-bold mb-2">{{ question.questionText }}</p>
   <div>
-    <ng-container *fgeDynamicContainer></ng-container>
+    <h1>Question</h1>
+    <ng-template appComponentHost></ng-template>
   </div>
 </div>

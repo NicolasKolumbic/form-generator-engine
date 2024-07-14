@@ -1,4 +1,5 @@
-<div class="ap-mt-spacing-8">
-  <h3 *ngIf="page.title">{{ page.title }}</h3>
-  <ng-container *fgeDynamicContainer></ng-container>
+<div class="ap-mt-spacing-8" [@showHide]="isShow">
+  <h1>Page</h1>
+  <h3 *ngIf="title">{{ title }}</h3>
+  <ng-template appComponentHost></ng-template>
 </div>
