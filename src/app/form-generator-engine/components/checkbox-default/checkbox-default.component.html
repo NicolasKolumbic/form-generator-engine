@@ -1,4 +1,4 @@
-<div class="flex gap-2 relative" [@showHide]="isShow">
+<div class="flex gap-2 relative" [showHideAnimation]="question">
     <input type="checkbox" [id]="question.name" [formControl]="question.control" [disabled]="question.disabled" class="
       relative peer shrink-0
       appearance-none w-4 h-4 border-2 border-orange-500 rounded-sm bg-white

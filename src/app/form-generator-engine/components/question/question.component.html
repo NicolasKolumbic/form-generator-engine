@@ -1,7 +1,7 @@
-<div class="mt-4" [@showHide]="isShow">
+<div class="mt-4" [showHideAnimation]="question">
   <p class="text-lg font-bold mb-2">{{ question.questionText }}</p>
   <div>
     <h1>Question</h1>
-    <ng-template appComponentHost></ng-template>
+    <app-template-factory />
   </div>
 </div>

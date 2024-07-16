@@ -1,5 +1,5 @@
-<div class="ap-mt-spacing-8" [@showHide]="isShow">
+<div class="ap-mt-spacing-8" [showHideAnimation]="page">
   <h1>Page</h1>
   <h3 *ngIf="title">{{ title }}</h3>
-  <ng-template appComponentHost></ng-template>
+  <app-template-factory />
 </div>

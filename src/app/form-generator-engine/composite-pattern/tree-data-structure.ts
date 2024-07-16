@@ -16,6 +16,18 @@ export abstract class TreeDataStructure extends BaseElement {
     this.#left = left;
   }
 
+  get child(): BaseElement | undefined {
+    return this.#child;
+  }
+
+  get right(): BaseElement | undefined{
+    return this.#right;
+  }
+
+  get left(): BaseElement | undefined{
+    return this.#left;
+  }
+
   hasPrevious(): boolean {
     return this.#left !== undefined;
   }

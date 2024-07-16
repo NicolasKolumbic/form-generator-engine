@@ -17,6 +17,7 @@ import { TextfieldDefaultComponent } from './components/textfield-default/textfi
 import { ComboboxDefaultComponent } from './components/combobox-default/combobox-default.component';
 import { ComponentHostDirective } from './directives/container.directive';
 import { TemplateFactoryComponent } from './components/template-factory/template-factory.component';
+import { ShowHideDirective } from './directives/show-hide.directive';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TemplateFactoryComponent } from './components/template-factory/template
     CheckboxDefaultComponent,
     TextfieldDefaultComponent,
     ComboboxDefaultComponent,
-    TemplateFactoryComponent
+    TemplateFactoryComponent,
+    ShowHideDirective
   ],
   imports: [
     CommonModule,

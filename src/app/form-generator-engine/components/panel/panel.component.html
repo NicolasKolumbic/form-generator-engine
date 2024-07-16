@@ -1,7 +1,7 @@
-<div [@showHide]="isShow">
+<div [showHideAnimation]="panel">
   <h4 *ngIf="title">{{ title }}</h4>
   <h1>Panel</h1>
   <div>
-    <ng-template appComponentHost></ng-template>
+    <app-template-factory />
   </div>
 </div>

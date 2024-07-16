@@ -1,4 +1,4 @@
-<div class="custom-dropdown" [@showHide]="isShow">
+<div class="custom-dropdown" [showHideAnimation]="question">
     <button (click)="open()" class="custom-dropdown__dropdown-button">
       <ng-container *ngIf="selectedValue">
         {{ selectedValue['key'] }}

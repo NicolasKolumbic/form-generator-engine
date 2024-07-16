@@ -13,33 +13,26 @@ import {
 } from '@form-generator-engine/abstractions';
 import { DynamicForm } from '@form-generator-engine/composite-pattern';
 import { FormSessionService } from '@form-generator-engine/services/form-session.service';
-import { Controls, ShowHide } from '@form-generator-engine/helpers';
-import { ComponentHostDirective } from '@form-generator-engine/directives/container.directive';
-import { FactoryResolverService } from '@form-generator-engine/services/factory-resolver.service';
+import { Controls } from '@form-generator-engine/helpers';
 import { FactoryComponent } from '@form-generator-engine/abstractions/factory-component';
-import { showHideAnimation } from '@form-generator-engine/helpers/animation-show-hide';
+import { TemplateFactoryComponent } from '../template-factory/template-factory.component';
 
 @Component({
   selector: 'fge-form-viewer',
   templateUrl: './form-viewer.component.html',
-  providers: [FactoryResolverService],
-  animations: [showHideAnimation],
 })
 export class FormViewerComponent implements FactoryComponent {
   @Input() source: JSONValue | null = null;
   @Output() updateForm: EventEmitter<UpdatedForm> = new EventEmitter();
 
-  @ViewChild(ComponentHostDirective) container!: ComponentHostDirective;
+  @ViewChild(TemplateFactoryComponent, { static: true })
+  factory!: TemplateFactoryComponent;
 
   title?: string;
   initialized?: boolean;
-  isShow: ShowHide = ShowHide.Show;
 
-  constructor(
-    private readonly formSession: FormSessionService,
-    private readonly factoryResolverService: FactoryResolverService
-  ) {}
-  
+  constructor(private readonly formSession: FormSessionService) {}
+
   transform<TComponent>(_element: DynamicComponent<TComponent>): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -79,7 +72,7 @@ export class FormViewerComponent implements FactoryComponent {
     this.formSession.form = undefined;
   }
 
-  private init(formSchema: FormSchema): void {
+  private async init(formSchema: FormSchema): Promise<void> {
     this.initialized = true;
     const dynamicGeneratedform: DynamicForm | null =
       this.formSession.generate(formSchema);
@@ -91,13 +84,7 @@ export class FormViewerComponent implements FactoryComponent {
         this.updateForm.emit(value);
       });
 
-      this.formSession.form.visibilityChanged.subscribe((visibility: boolean) => {
-        this.isShow = visibility ? ShowHide.Show : ShowHide.Hide;
-      });
-
-      this.factoryResolverService.name = "form-viewer";
-      this.factoryResolverService.container = this.container;
-      this.factoryResolverService.generateView(this.formSession.form, this.transform);
+      await this.factory.generateView(this.formSession.form);
     }
   }
 
@@ -108,9 +95,5 @@ export class FormViewerComponent implements FactoryComponent {
     ) {
       this.formSession.form.checkAndUpdate();
     }
-  }
-
-  hideFromView(arg: any) {
-    console.log(arguments);
   }
 }

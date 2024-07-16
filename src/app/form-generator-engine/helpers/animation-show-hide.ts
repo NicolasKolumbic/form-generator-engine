@@ -1,25 +1,32 @@
 import {
-  trigger,
-  state,
   style,
-  transition,
   animate,
-  AnimationTriggerMetadata,
 } from '@angular/animations';
 
-export const showHideAnimation: AnimationTriggerMetadata = trigger('showHide', [
-  state(
-    'show',
+export const hideAnimation = (currentHeight: number) => {
+
+  return [
     style({
       opacity: 1,
-    })
-  ),
-  state(
-    'hide',
+      height: currentHeight
+    }),
+    animate('0.4s', style({
+      opacity: 0,
+      height: 0
+    })),
+  ]
+}
+
+export const showAnimation = (currentHeight: number) => {
+
+  return [
     style({
       opacity: 0,
-    })
-  ),
-  transition('show => hide', [animate('0.4s')]),
-  transition('hide => show', [animate('0.4s')]),
-]);
+      height: 0
+    }),
+    animate('0.4s', style({
+      opacity: 1,
+      height: currentHeight
+    })),
+  ]
+}

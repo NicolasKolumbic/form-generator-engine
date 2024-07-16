@@ -12,7 +12,7 @@ export abstract class BaseElement implements Metadata, HtmlFormControl {
 
   constructor(name: string, isVisible: boolean, title?: string, metadata?: JSONObject) {
     this.#name = name ?? crypto.randomUUID();
-    this.#isVisible = isVisible === undefined;
+    this.#isVisible = isVisible === undefined || isVisible;
     this.#title = title ?? '';
     this.#isInjected = false;
     this.#visibilityChanged = new Subject();

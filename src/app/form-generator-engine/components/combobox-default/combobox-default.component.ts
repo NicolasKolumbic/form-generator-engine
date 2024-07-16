@@ -1,21 +1,18 @@
 import { ChangeDetectionStrategy, Component, HostListener, Input } from '@angular/core';
 import { QuestionBaseComponent } from '@form-generator-engine/abstractions';
 import { QuestionControl } from '@form-generator-engine/composite-pattern';
-import { ShowHide } from '@form-generator-engine/helpers';
-import { showHideAnimation } from '@form-generator-engine/helpers/animation-show-hide';
 
 @Component({
   selector: 'app-combobox-default',
   templateUrl: './combobox-default.component.html',
   styleUrls: ['./combobox-default.component.scss'],
-  animations: [showHideAnimation]
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComboboxDefaultComponent implements QuestionBaseComponent {
   @Input() question!: QuestionControl;
 
   isShowDropdownMenu: boolean = false;
   selectedValue?: JSONObject;
-  isShow: ShowHide = ShowHide.Show;
 
   get options() {
     return this.question.options;
@@ -26,12 +23,6 @@ export class ComboboxDefaultComponent implements QuestionBaseComponent {
     if (target && !target.matches('.custom-dropdown__dropdown-button')) {
       this.isShowDropdownMenu = false;
     }
-  }
-
-  ngOnInit(): void {
-    this.question.visibilityChanged.subscribe((visibility: boolean) => {
-      this.isShow = visibility ? ShowHide.Show : ShowHide.Hide;
-    })
   }
 
   open() {

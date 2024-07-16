@@ -15,7 +15,6 @@ enum InputNames {
 @Injectable()
 export class FactoryResolverService {
 
-  name!: string;
   container!: ComponentHostDirective;
 
   constructor(
@@ -23,20 +22,24 @@ export class FactoryResolverService {
     private injector: EnvironmentInjector,
   ) {}
 
-  async generateView<TComponent>(element: DynamicComponent<TComponent>, transform: (element:  DynamicComponent<TComponent>)=> void): Promise<void> {
+  async generateView<TComponent>(element: DynamicComponent<TComponent>, transform?: (element:  DynamicComponent<TComponent>)=> void): Promise<void> {
     const generatedComponent: DynamicComponent<TComponent> = this.createComponent(element);
-    transform(element);
+    if (transform) {
+      transform(element);
+    }
     await this.appendToView(generatedComponent);
   }
 
   async generateViewByList<TComponent>(
     elements: DynamicComponent<TComponent>[],
-    transform: (element:  DynamicComponent<TComponent>)=> void
+    transform?: (element:  DynamicComponent<TComponent>)=> void
   ): Promise<void> {
     const generatedComponents =
       this.createComponentByList(elements);
     elements.forEach((element: DynamicComponent<TComponent>) => {
-      transform(element);
+      if (transform) {
+        transform(element);
+      }
     });
     await this.appendToViewByList(generatedComponents);
   }

@@ -49,8 +49,6 @@ export class DynamicForm
 
       this.elements.push(page);
     });
-    
-    
   }
 
   getValue(): JSONValue {

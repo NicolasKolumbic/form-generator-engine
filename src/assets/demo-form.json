@@ -1,6 +1,7 @@
 {
     "name": "form",
     "componentType": 1,
+    "isVisible": true,
     "elements": [
       {
         "componentType": 2,

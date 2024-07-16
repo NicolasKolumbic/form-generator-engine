@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, WritableSignal, signal } from '@angular/c
 import { UpdatedForm } from '@form-generator-engine/abstractions';
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 import { DemoDataService } from './services/demo-data.service';
+import { FormSessionService } from '@form-generator-engine/services/form-session.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,9 @@ export class AppComponent implements OnInit {
   public editorOptions: JsonEditorOptions;
   @ViewChild(JsonEditorComponent, { static: false }) editor!: JsonEditorComponent;
 
-  constructor(private readonly demoDataService: DemoDataService) {
+  constructor(
+    private readonly demoDataService: DemoDataService
+  ) {
     this.editorOptions = new JsonEditorOptions();
     this.editorOptions.modes = ['code', 'text', 'tree', 'view']; 
   }

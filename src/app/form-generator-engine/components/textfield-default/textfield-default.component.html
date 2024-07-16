@@ -1,4 +1,4 @@
-<div [@showHide]="isShow">
+<div  [showHideAnimation]="question">
     <label [attr.for]="question.name" class="pr-2">{{ question.label }}</label>
     <input type="text" 
         [formControl]="question.control"

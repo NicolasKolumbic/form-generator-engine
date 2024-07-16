@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -16,41 +15,26 @@ import {
   QuestionControl,
 } from '@form-generator-engine/composite-pattern';
 import { FormSessionService } from '@form-generator-engine/services/form-session.service';
-import { showHideAnimation } from '@form-generator-engine/helpers/animation-show-hide';
-import { ComponentHostDirective } from '@form-generator-engine/directives/container.directive';
-import { FactoryResolverService } from '@form-generator-engine/services/factory-resolver.service';
 import { FactoryComponent } from '@form-generator-engine/abstractions/factory-component';
-import { ShowHide } from '@form-generator-engine/helpers';
-import { timer } from 'rxjs';
+import { TemplateFactoryComponent } from '../template-factory/template-factory.component';
 
 @Component({
   selector: 'fge-question',
   templateUrl: './question.component.html',
-  providers: [FactoryResolverService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [showHideAnimation],
 })
 export class QuestionComponent
-  implements FactoryComponent, OnInit
+  implements FactoryComponent
 {
   @Input() question!: Question;
 
-  @ViewChild(ComponentHostDirective) container!: ComponentHostDirective;
-
-  isShow: ShowHide = ShowHide.Hide;
+  @ViewChild(TemplateFactoryComponent, {static: true}) factory!: TemplateFactoryComponent;
 
   constructor(
-    private readonly factoryResolverService: FactoryResolverService,
     private readonly formSession: FormSessionService) {}
 
-  ngOnInit(): void {
-    this.isShow = this.question.isVisible ? ShowHide.Show : ShowHide.Hide;
-  }
-
   ngAfterViewInit(): void {
-    this.factoryResolverService.name = "question";
-    this.factoryResolverService.container = this.container;
-    this.factoryResolverService.generateViewByList(this.question.elements, this.transform.bind(this));
+    this.factory.generateViewByList(this.question.elements, this.transform.bind(this));
   }
   
   ngOnChanges(changes: SimpleChanges): void {}
@@ -68,10 +52,6 @@ export class QuestionComponent
       questionControl.update.subscribe((updatedValue: UpdateField) => {
         this.formSession.form!.updateValue(updatedValue, questionControl);
       });
-
-      this.question.visibilityChanged.subscribe((visibility: boolean) => {
-        this.isShow = visibility ? ShowHide.Show : ShowHide.Hide;
-      })
 
       
       formControl.valueChanges.subscribe((value: string | null) => {
@@ -105,13 +85,4 @@ export class QuestionComponent
     return validations;
   }
 
-  private generateViewByList<TComponent>(questions: DynamicComponent<TComponent>[]): void {
-    this.factoryResolverService.name = "question";
-    this.factoryResolverService.container = this.container;
-    const generatedComponents = this.factoryResolverService.createComponentByList(questions);
-    generatedComponents.forEach((component: DynamicComponent<TComponent>) => {
-      this.transform(component);
-    })
-    this.factoryResolverService.appendToViewByList(generatedComponents);
-  }
 }
