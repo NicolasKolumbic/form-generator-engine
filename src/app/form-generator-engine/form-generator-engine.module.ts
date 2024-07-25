@@ -1,4 +1,4 @@
-import { EnvironmentInjector, inject, ModuleWithProviders, NgModule, Provider } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormViewerComponent } from './components/form-viewer/form-viewer.component';
 import { Setting } from './services/setting';
 import { FormSessionService } from './services/form-session.service';
@@ -18,6 +18,11 @@ import { ComboboxDefaultComponent } from './components/combobox-default/combobox
 import { ComponentHostDirective } from './directives/container.directive';
 import { TemplateFactoryComponent } from './components/template-factory/template-factory.component';
 import { ShowHideDirective } from './directives/show-hide.directive';
+import { OnlyNumberComponent } from './components/only-number/only-number.component';
+import { MaskedInputDefaultComponent } from './components/masked-input-default/masked-input-default.component';
+import { MaskedDefaultDirective } from './directives/masked-default.directive';
+import { DatepickerDefaultComponent } from './components/datepicker-default/datepicker-default.component';
+import { CalendarDefaultComponent } from './components/datepicker-default/calendar-default/calendar-default.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,12 @@ import { ShowHideDirective } from './directives/show-hide.directive';
     TextfieldDefaultComponent,
     ComboboxDefaultComponent,
     TemplateFactoryComponent,
-    ShowHideDirective
+    ShowHideDirective,
+    OnlyNumberComponent,
+    MaskedInputDefaultComponent,
+    MaskedDefaultDirective,
+    DatepickerDefaultComponent,
+    CalendarDefaultComponent
   ],
   imports: [
     CommonModule,
@@ -46,14 +56,6 @@ export class FormGeneratorEngineModule {
   static forRoot(
     setting: Setting
   ): ModuleWithProviders<FormGeneratorEngineModule> {
-    const providers: Provider[] = [];
-
-    if (setting.schemaFactory) {
-      providers.push({
-        provide: SchemaFactoryService,
-        useClass: setting.schemaFactory,
-      });
-    }
 
     return {
       ngModule: FormGeneratorEngineModule,

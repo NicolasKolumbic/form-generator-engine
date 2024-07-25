@@ -1,4 +1,4 @@
-import { Container, Schema, ContainerSchema, FormElement, BaseElement as BaseElementInterface } from '../abstractions';
+import { Container, Schema, ContainerSchema } from '../abstractions';
 import { BaseElement } from './base-element';
 import { TreeDataStructure } from './tree-data-structure';
 import { factory } from '@form-generator-engine/helpers/factory-function';
@@ -28,20 +28,20 @@ export abstract class ElementManager<TChild, TParent, TSchema>
       }
 
       if (index < elements.length && index > 0) {
-        (this.elements[index - 1] as FormElement<TChild, TParent>).setNext(
-          elementNode as TChild
+        (this.elements[index - 1] as TreeDataStructure).setNext(
+          elementNode
         );
       }
 
       if (index === 0) {
-        this.setChild(elementNode as BaseElement);
+        this.setFirstChild(elementNode as BaseElement);
       }
 
       this.elements.push(elementNode as TChild);
     });
   }
 
-  protected setParent(parent: TParent): void {
+  setParent(parent: TParent): void {
     this.parent = parent;
   }
 

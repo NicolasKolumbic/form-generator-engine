@@ -7,4 +7,7 @@ export enum Controls {
   Switch = 6,
   Checkbox = 7,
   Combobox = 8,
+  Number = 9,
+  MaskedInput= 10,
+  Datepicker = 11
 }

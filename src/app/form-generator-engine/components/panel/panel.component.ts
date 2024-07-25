@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   Input,
@@ -8,7 +9,7 @@ import {
 } from '@angular/core';
 import { Panel } from '@form-generator-engine/composite-pattern';
 import { DynamicComponent } from '@form-generator-engine/abstractions';
-import { FactoryComponent } from '@form-generator-engine/abstractions/factory-component';
+import { FactoryComponent } from '@form-generator-engine/abstractions/internal';
 import { TemplateFactoryComponent } from '../template-factory/template-factory.component';
 
 @Component({
@@ -16,7 +17,7 @@ import { TemplateFactoryComponent } from '../template-factory/template-factory.c
   templateUrl: './panel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PanelComponent implements FactoryComponent, OnInit {
+export class PanelComponent implements FactoryComponent, OnInit, AfterViewInit {
   @Input() panel!: Panel;
 
   title?: string;
@@ -26,10 +27,6 @@ export class PanelComponent implements FactoryComponent, OnInit {
   ngOnInit(): void {
     this.title = this.panel.title;
   }
-
-  transform<TComponent>(element: DynamicComponent<TComponent>): void {}
-  
-  ngOnChanges(changes: SimpleChanges): void {}
 
   ngAfterViewInit(): void {
     this.factory.generateViewByList(this.panel.elements);

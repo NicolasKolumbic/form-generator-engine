@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, WritableSignal, signal } from '@angular/core';
-import { UpdatedForm } from '@form-generator-engine/abstractions';
+import { PageSchema, UpdatedForm } from '@form-generator-engine/abstractions';
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 import { DemoDataService } from './services/demo-data.service';
-import { FormSessionService } from '@form-generator-engine/services/form-session.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +12,8 @@ export class AppComponent implements OnInit {
   schema: WritableSignal<JSONValue | null> = signal(null);
   public editorOptions: JsonEditorOptions;
   @ViewChild(JsonEditorComponent, { static: false }) editor!: JsonEditorComponent;
+
+  page!: PageSchema;
 
   constructor(
     private readonly demoDataService: DemoDataService
@@ -25,10 +26,14 @@ export class AppComponent implements OnInit {
     this.demoDataService.getData('/assets/demo-form.json').subscribe((data) => {
       this.schema.set(data as JSONValue);
     });
+
+    this.demoDataService.getData('/assets/demo-page.json').subscribe((data) => {
+      this.page = data as PageSchema;
+    });
   }
 
   updateForm(updatedValue: UpdatedForm) {
     console.log(updatedValue);
-    updatedValue.form.hide();
+    updatedValue.form.addSchemaElement(this.page);
   }
 }

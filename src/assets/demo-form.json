@@ -9,6 +9,7 @@
         "elements": [
           {
             "name": "panel",
+            "title": "Basic Data",
             "componentType": 3,
             "elements": [
               {
@@ -63,7 +64,7 @@
                 "elements": [
                   {
                     "componentType": 8,
-                    "name": "question-ctrol-2",
+                    "name": "question-ctrol-4",
                     "label": "Answer",
                     "options": [
                       {"key": "Argentina", "value": "ARG"},
@@ -77,15 +78,41 @@
                 ]
               },
               {
-                "name": "question-4",
+                "name": "question-5",
                 "componentType": 4,
-                "questionId": 4,
+                "questionId": 5,
                 "questionText": "¿Posee carnet de conducir?",
                 "elements": [
                   {
                     "componentType": 6,
-                    "name": "question-ctrol-3",
+                    "name": "question-ctrol-5",
                     "label": "Yes"
+                  }
+                ]
+              },
+              {
+                "name": "question-6",
+                "componentType": 4,
+                "questionId": 6,
+                "questionText": "What is your ID?",
+                "elements": [
+                  {
+                    "componentType": 10,
+                    "name": "question-ctrol-6",
+                    "label": "ID"
+                  }
+                ]
+              },
+              {
+                "name": "question-7",
+                "componentType": 4,
+                "questionId": 7,
+                "questionText": "When is your birthday?",
+                "elements": [
+                  {
+                    "componentType": 11,
+                    "name": "question-ctrol-7",
+                    "label": "Birthday"
                   }
                 ]
               }

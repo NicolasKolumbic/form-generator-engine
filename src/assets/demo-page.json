@@ -1,0 +1,90 @@
+{
+    "componentType": 2,
+    "name": "page-2",
+    "elements": [
+      {
+        "name": "panel-2",
+        "componentType": 3,
+        "elements": [
+          {
+            "name": "question-1",
+            "componentType": 4,
+            "questionId": 1,
+            "questionText": "What is your first name?",
+            "elements": [
+              {
+                "componentType": 5,
+                "name": "question-ctrol-1",
+                "label": "Answer",
+                "value": "Nicolás",
+                "minLength": 5
+              }
+            ]
+          },
+          {
+            "name": "question-2",
+            "componentType": 4,
+            "questionId": 2,
+            "questionText": "What is your last name?",
+            "elements": [
+              {
+                "componentType": 5,
+                "name": "question-ctrol-2",
+                "label": "Answer",
+                "value": "Kolumbic",
+                "minLength": 5
+              }
+            ]
+          },
+          {
+            "name": "question-3",
+            "componentType": 4,
+            "questionId": 3,
+            "questionText": "What is your email?",
+            "elements": [
+              {
+                "componentType": 5,
+                "name": "question-ctrol-3",
+                "label": "Answer",
+                "placeholder": "example@hotmail.com"
+              }
+            ]
+          },
+          {
+            "name": "question-4",
+            "componentType": 4,
+            "questionId": 4,
+            "questionText": "What country of origin are you from?",
+            "elements": [
+              {
+                "componentType": 8,
+                "name": "question-ctrol-2",
+                "label": "Answer",
+                "options": [
+                  {"key": "Argentina", "value": "ARG"},
+                  {"key": "Uruguay", "value": "URU"},
+                  {"key": "Chile", "value": "CHI"},
+                  {"key": "Paraguay", "value": "PAR"},
+                  {"key": "Bolivia", "value": "BOL"},
+                  {"key": "Brasil", "value": "BRA"}
+                ]
+              }
+            ]
+          },
+          {
+            "name": "question-4",
+            "componentType": 4,
+            "questionId": 4,
+            "questionText": "¿Posee carnet de conducir?",
+            "elements": [
+              {
+                "componentType": 6,
+                "name": "question-ctrol-3",
+                "label": "Yes"
+              }
+            ]
+          }
+        ]
+      } 
+    ]
+  } 

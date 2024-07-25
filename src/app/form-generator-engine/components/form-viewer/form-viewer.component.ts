@@ -1,39 +1,39 @@
 import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import {
-  DynamicComponent,
   FormSchema,
   UpdatedForm,
 } from '@form-generator-engine/abstractions';
 import { DynamicForm } from '@form-generator-engine/composite-pattern';
 import { FormSessionService } from '@form-generator-engine/services/form-session.service';
 import { Controls } from '@form-generator-engine/helpers';
-import { FactoryComponent } from '@form-generator-engine/abstractions/factory-component';
+import { FactoryComponent } from '@form-generator-engine/abstractions/internal';
 import { TemplateFactoryComponent } from '../template-factory/template-factory.component';
 
 @Component({
   selector: 'fge-form-viewer',
   templateUrl: './form-viewer.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormViewerComponent implements FactoryComponent {
+export class FormViewerComponent implements FactoryComponent, AfterViewInit, OnChanges {
   @Input() source: JSONValue | null = null;
   @Output() updateForm: EventEmitter<UpdatedForm> = new EventEmitter();
 
   @ViewChild(TemplateFactoryComponent, { static: true })
   factory!: TemplateFactoryComponent;
 
-  title?: string;
   initialized?: boolean;
 
   constructor(private readonly formSession: FormSessionService) {}
-
-  transform<TComponent>(_element: DynamicComponent<TComponent>): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['source'] && !changes['source'].firstChange) {
@@ -60,8 +60,6 @@ export class FormViewerComponent implements FactoryComponent {
     if (formSchema) {
       if (!this.initialized) {
         this.init(formSchema);
-      } else {
-        this.update(formSchema);
       }
     }
   }
@@ -85,15 +83,6 @@ export class FormViewerComponent implements FactoryComponent {
       });
 
       await this.factory.generateView(this.formSession.form);
-    }
-  }
-
-  private update(data: FormSchema): void {
-    if (
-      this.formSession.form &&
-      this.formSession.form.elements.length !== data.elements.length
-    ) {
-      this.formSession.form.checkAndUpdate();
     }
   }
 }

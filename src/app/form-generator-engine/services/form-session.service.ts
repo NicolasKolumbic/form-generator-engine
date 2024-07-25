@@ -62,6 +62,21 @@ export class FormSessionService {
         this.setting.overwrittenControls.form
       ) {
         return this.setting.overwrittenControls.form;
+      } else if (
+        index === Controls.Number &&
+        this.setting.overwrittenControls.number
+      ) {
+        return this.setting.overwrittenControls.number;
+      } else if (
+        index === Controls.MaskedInput &&
+        this.setting.overwrittenControls.maskedinput
+      ) {
+        return this.setting.overwrittenControls.maskedinput;
+      } else if (
+        index === Controls.Datepicker &&
+        this.setting.overwrittenControls.datepicker
+      ) {
+        return this.setting.overwrittenControls.datepicker;
       }
     }
 

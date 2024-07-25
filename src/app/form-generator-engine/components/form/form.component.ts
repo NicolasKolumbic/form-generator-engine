@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   Input,
@@ -8,7 +9,7 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { DynamicForm } from '@form-generator-engine/composite-pattern';
 import { DynamicComponent } from '@form-generator-engine/abstractions';
-import { FactoryComponent } from '@form-generator-engine/abstractions/factory-component';
+import { FactoryComponent } from '@form-generator-engine/abstractions/internal';
 import { TemplateFactoryComponent } from '../template-factory/template-factory.component';
 
 @Component({
@@ -16,7 +17,7 @@ import { TemplateFactoryComponent } from '../template-factory/template-factory.c
   templateUrl: './form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormComponent implements FactoryComponent {
+export class FormComponent implements FactoryComponent, AfterViewInit {
   @Input() form!: DynamicForm;
   @ViewChild(TemplateFactoryComponent, {static: true}) factory!: TemplateFactoryComponent;
 
@@ -24,14 +25,6 @@ export class FormComponent implements FactoryComponent {
 
   constructor() {
     this.generatedform = new FormGroup({});
-  }
-
-  transform<TComponent>(element: DynamicComponent<TComponent>): void {
-   
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    
   }
 
   ngAfterViewInit(): void {

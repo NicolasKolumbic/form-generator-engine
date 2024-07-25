@@ -1,7 +1,7 @@
 import { Setting } from '../services/setting';
 import { controlsSettingBase } from './controls-setting-base';
 
-export function configurationSetter(setting: Partial<Setting>): Setting {
+export function configurationSetter(setting: Partial<Setting>): Partial<Setting> {
   if (setting.overwrittenControls) {
     if (!setting.overwrittenControls.switch) {
       setting.overwrittenControls.switch = controlsSettingBase.switch;
@@ -26,6 +26,15 @@ export function configurationSetter(setting: Partial<Setting>): Setting {
     }
     if (!setting.overwrittenControls.question) {
       setting.overwrittenControls.question = controlsSettingBase.question;
+    }
+    if (!setting.overwrittenControls.question) {
+      setting.overwrittenControls.question = controlsSettingBase.question;
+    }
+    if (!setting.overwrittenControls.number) {
+      setting.overwrittenControls.number = controlsSettingBase.number;
+    }
+    if (!setting.overwrittenControls.maskedinput) {
+      setting.overwrittenControls.maskedinput = controlsSettingBase.maskedinput;
     }
   } else {
     setting.overwrittenControls = controlsSettingBase;

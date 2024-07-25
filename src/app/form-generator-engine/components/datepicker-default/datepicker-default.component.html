@@ -1,0 +1,7 @@
+<div id="date_picker">
+    <div id="date_picker_input" [class.showCal]="isShow">
+      <label>Datepicker</label>
+      <input type="text" id="date" [class.onFocus]="!isShow" readonly (click)="showCalendar()" />
+      <app-calendar-default *ngIf="isShow" />
+    </div>
+</div>

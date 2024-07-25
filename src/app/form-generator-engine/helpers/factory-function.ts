@@ -6,7 +6,7 @@ import {
     QuestionSchema,
     Schema,
   } from '../abstractions';
-  import { ContainerSchema } from '../abstractions/container-schema';
+  import { ContainerSchema } from '../abstractions/schemas/container-schema';
   import {
     BaseElement,
     DynamicForm,

@@ -4,5 +4,5 @@ import { ControlsSetting } from '../abstractions';
 @Injectable()
 export class Setting {
   overwrittenControls?: ControlsSetting;
-  schemaFactory?: Type<unknown> | undefined;
+  schemaFactory: Type<unknown> | undefined;
 }

@@ -1,0 +1,36 @@
+<div id="date_picker_calendar">
+  <div id="calendar_header">
+    <button class="cal-btn" (click)="previous()">
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABJUlEQVR4nO2Uv0oDQRCHR9BKrAQJ2FgIdnc7njtzSbMzd7lGC80T5DXMW+gzpNJHsPEJYuELBA60EBELsfIfBGIixvNyt0IKP9h2vt3fb1iAfxaCXZt0DGuOrO8+jmHNQ3JHnwLDeutrOI4lJDcTAcngDwSDSUSkCbK++RSEJAdfejCkfX+31/63oq1N15H0rn7Bch80s42Z22SsdGsLrHQLVxZJLioLSC8BYKlQELLbQpanCrk/Y+y2C4dPFd6bP3s9hrI455aR9GqO219HUbRSWjB6xV5qDcnL7wJ5RZs2oQpIelqi2BOoShBkq0g6LMg932m11qAOhnX/5+zlEHyALOczhp+BL6x1DSR9mPoOHsM42QSfGE6yUR+kQxO7ttfhC80HheuaG9wAq10AAAAASUVORK5CYII="
+      />
+    </button>
+    <span>{{currentMonth}}</span>
+    <button class="cal-btn" (click)="next()">
+      <img
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABJUlEQVR4nO2Uv0oDQRCHR9BKrAQJ2FgIdnc7njtzSbMzd7lGC80T5DXMW+gzpNJHsPEJYuELBA60EBELsfIfBGIixvNyt0IKP9h2vt3fb1iAfxaCXZt0DGuOrO8+jmHNQ3JHnwLDeutrOI4lJDcTAcngDwSDSUSkCbK++RSEJAdfejCkfX+31/63oq1N15H0rn7Bch80s42Z22SsdGsLrHQLVxZJLioLSC8BYKlQELLbQpanCrk/Y+y2C4dPFd6bP3s9hrI455aR9GqO219HUbRSWjB6xV5qDcnL7wJ5RZs2oQpIelqi2BOoShBkq0g6LMg932m11qAOhnX/5+zlEHyALOczhp+BL6x1DSR9mPoOHsM42QSfGE6yUR+kQxO7ttfhC80HheuaG9wAq10AAAAASUVORK5CYII="
+      />
+    </button>
+  </div>
+  <div id="cal_wrapper">
+    <div id="cal_days">
+      <div class="cell_wrapper" *ngFor="let day of days; index as i">
+        <span class="cell_item">{{ day.slice(0, 2) }}</span>
+      </div>
+    </div>
+    <div id="calendar_main">
+      <ng-container *ngFor="let cell of monthDetails">
+        <div
+          class="cell_wrapper cal_date"
+          [class.current]="cell.month === 0"
+          [class.isCurrent]="
+            cell.month === 0 && cell.timestamp === todayTimestamp
+          "
+          [class.active]="cell.month === 0 && cell.timestamp === todayTimestamp"
+        >
+          <span class="cell_item">{{ cell.date }}</span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

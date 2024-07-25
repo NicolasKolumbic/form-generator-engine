@@ -3,7 +3,8 @@ import { BaseElement } from './base-element';
 export abstract class TreeDataStructure extends BaseElement {
   #left: BaseElement | undefined;
   #right: BaseElement | undefined;
-  #child: BaseElement | undefined;
+  #firstChild: BaseElement | undefined;
+  #lastChild: BaseElement | undefined;
 
   constructor(
     name: string,
@@ -16,8 +17,12 @@ export abstract class TreeDataStructure extends BaseElement {
     this.#left = left;
   }
 
-  get child(): BaseElement | undefined {
-    return this.#child;
+  get firstChild(): BaseElement | undefined {
+    return this.#firstChild;
+  }
+
+  get lastChild(): BaseElement | undefined {
+    return this.#lastChild;
   }
 
   get right(): BaseElement | undefined{
@@ -46,12 +51,17 @@ export abstract class TreeDataStructure extends BaseElement {
     return this;
   }
 
-  hasChild(): boolean {
-    return this.#child !== undefined;
+  hasfirstChild(): boolean {
+    return this.#firstChild !== undefined;
   }
 
-  setChild(child: BaseElement): TreeDataStructure {
-    this.#child = child;
+  setFirstChild(firstChild: BaseElement): TreeDataStructure {
+    this.#firstChild = firstChild;
+    return this;
+  }
+
+  setLastChild(lastChild: BaseElement): TreeDataStructure {
+    this.#lastChild = lastChild;
     return this;
   }
 }

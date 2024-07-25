@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   Input,
@@ -15,7 +16,7 @@ import {
   QuestionControl,
 } from '@form-generator-engine/composite-pattern';
 import { FormSessionService } from '@form-generator-engine/services/form-session.service';
-import { FactoryComponent } from '@form-generator-engine/abstractions/factory-component';
+import { FactoryComponent } from '@form-generator-engine/abstractions/internal';
 import { TemplateFactoryComponent } from '../template-factory/template-factory.component';
 
 @Component({
@@ -24,7 +25,7 @@ import { TemplateFactoryComponent } from '../template-factory/template-factory.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionComponent
-  implements FactoryComponent
+  implements FactoryComponent, AfterViewInit
 {
   @Input() question!: Question;
 
@@ -37,9 +38,7 @@ export class QuestionComponent
     this.factory.generateViewByList(this.question.elements, this.transform.bind(this));
   }
   
-  ngOnChanges(changes: SimpleChanges): void {}
-
-  transform<TComponent>(element: DynamicComponent<TComponent>): void {
+  private transform<TComponent>(element: DynamicComponent<TComponent>): void {
     const questionControl = element as unknown as QuestionControl;
     if (!questionControl.control) {
       const validations: ValidatorFn[] = this.getValidations(questionControl);

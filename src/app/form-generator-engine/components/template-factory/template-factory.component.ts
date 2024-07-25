@@ -1,5 +1,5 @@
 import {  ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { DynamicComponent } from '@form-generator-engine/abstractions';
+import { DynamicComponent } from '@form-generator-engine/abstractions/internal';
 import { BaseElement } from '@form-generator-engine/composite-pattern';
 import { ComponentHostDirective } from '@form-generator-engine/directives/container.directive';
 import { FactoryResolverService } from '@form-generator-engine/services/factory-resolver.service';
@@ -17,7 +17,6 @@ export class TemplateFactoryComponent {
 
   async generateView<TComponent>(node: DynamicComponent<TComponent> & BaseElement, transform?: (element: DynamicComponent<TComponent>) => void): Promise<void> {
     this.factoryResolverService.container = this.container;
-
     this.factoryResolverService.generateView(node, transform);
   }
 

@@ -44,7 +44,7 @@ export class DynamicForm
       }
 
       if (index === 0) {
-        this.setChild(page)
+        this.setFirstChild(page)
       }
 
       this.elements.push(page);
@@ -63,7 +63,7 @@ export class DynamicForm
 
     this.update.next({
       value: this.value,
-      updatedQuestion: this.getQuestionSchema(question.parent),
+      updatedQuestion: this.getQuestionSchema(question.parent, true),
       questions: this.getAllQuestionSchemas(),
       page: question!.parent!.parent!.parent!.getSchema(['name']),
       panel: question!.parent!.parent!.getSchema(['name']),
@@ -73,21 +73,14 @@ export class DynamicForm
   }
 
 
-  addSchemaElement(page: PageSchema): Page[] {
+  addSchemaElement(page: PageSchema): void {
     const newPage = new Page(page, this);
+    const previousNode: Page | null = this.elements.length > 1 ? this.elements[this.elements.length - 1]: null;
+    if (previousNode) {
+      newPage.setPrevious(previousNode);
+    }
     this.elements.push(newPage);
-    return this.elements;
-  }
-
-  checkAndUpdate(): void {
-    this.elements.forEach((page: Page) => {
-      if (!page.hasInjected()) {
-        /*this.component.instance.createComponent(page);
-        this.component.instance.appendToView(page);
-        this.component.changeDetectorRef.markForCheck();*/
-      }
-      page.checkAndUpdate();
-    });
+    this.component.instance.factory.generateView(newPage);
   }
 
   addControl(name: string, control: FormControl): void {
@@ -107,13 +100,16 @@ export class DynamicForm
     });
 
     return questions.map((question: Question) => {
-      return this.getQuestionSchema(question);
+      return this.getQuestionSchema(question, true);
     });
   }
 
-  getQuestionSchema(question: Question): QuestionSchema {
+  getQuestionSchema(question: Question, includeMetadata: boolean): QuestionSchema {
     const schema = question.getSchema<QuestionSchema>(['questionId', 'name']);
     schema.value = question.getValue();
+    if (includeMetadata) {
+      schema.metadata = question.metadata() as JSONObject;
+    }
     return schema;
   }
 
