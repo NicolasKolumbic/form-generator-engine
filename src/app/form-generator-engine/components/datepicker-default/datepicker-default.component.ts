@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { QuestionBaseComponent } from '@form-generator-engine/abstractions';
+import { QuestionBaseComponent } from '@form-generator-engine/abstractions/public';
 import { QuestionControl } from '@form-generator-engine/composite-pattern';
 
 @Component({

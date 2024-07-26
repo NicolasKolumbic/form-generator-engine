@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, WritableSignal, signal } from '@angular/core';
-import { PageSchema, UpdatedForm } from '@form-generator-engine/abstractions';
 import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 import { DemoDataService } from './services/demo-data.service';
+import { UpdatedForm } from '@form-generator-engine/abstractions/public';
+import { PageSchema } from '@form-generator-engine/abstractions/schemas';
 
 @Component({
   selector: 'app-root',

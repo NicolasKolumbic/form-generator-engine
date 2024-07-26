@@ -3,12 +3,10 @@ import { Panel } from './panel';
 import { DynamicForm } from './dynamic-form';
 import { Controls } from '../helpers';
 import { FormEngineComponent } from '../typing/form-engine-component';
-import {
-  DynamicComponent,
-  PageSchema,
-  PanelSchema,
-} from '../abstractions';
+
 import { ElementManager } from './element-manager';
+import { DynamicComponent } from '@form-generator-engine/abstractions/internal';
+import { PageSchema, PanelSchema } from '@form-generator-engine/abstractions/schemas';
 
 export class Page
   extends ElementManager<Panel, DynamicForm, PageSchema>

@@ -9,15 +9,13 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import {
-  FormSchema,
-  UpdatedForm,
-} from '@form-generator-engine/abstractions';
 import { DynamicForm } from '@form-generator-engine/composite-pattern';
 import { FormSessionService } from '@form-generator-engine/services/form-session.service';
 import { Controls } from '@form-generator-engine/helpers';
 import { FactoryComponent } from '@form-generator-engine/abstractions/internal';
 import { TemplateFactoryComponent } from '../template-factory/template-factory.component';
+import { UpdatedForm } from '@form-generator-engine/abstractions/public';
+import { FormSchema } from '@form-generator-engine/abstractions/schemas';
 
 @Component({
   selector: 'fge-form-viewer',

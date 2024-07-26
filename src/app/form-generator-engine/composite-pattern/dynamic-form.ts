@@ -7,15 +7,11 @@ import { Panel } from './panel';
 import { QuestionControl } from './question-control';
 import { FormEngineComponent } from '../typing/form-engine-component';
 import { Controls } from '../helpers';
-import {
-  DynamicComponent,
-  FormSchema,
-  PageSchema,
-  QuestionSchema,
-  UpdateField,
-  UpdatedForm,
-} from '../abstractions';
+
 import { ElementManager } from './element-manager';
+import { DynamicComponent } from '@form-generator-engine/abstractions/internal';
+import { UpdatedForm, UpdateField } from '@form-generator-engine/abstractions/public';
+import { FormSchema, PageSchema, QuestionSchema } from '@form-generator-engine/abstractions/schemas';
 
 export class DynamicForm
   extends ElementManager<Page, null, FormSchema>

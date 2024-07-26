@@ -1,4 +1,6 @@
-import { Container, Schema, ContainerSchema } from '../abstractions';
+import { Container } from '@form-generator-engine/abstractions/internal';
+import { ContainerSchema } from '@form-generator-engine/abstractions/schemas';
+import { Schema } from '@form-generator-engine/abstractions/schemas/base/schema';
 import { BaseElement } from './base-element';
 import { TreeDataStructure } from './tree-data-structure';
 import { factory } from '@form-generator-engine/helpers/factory-function';

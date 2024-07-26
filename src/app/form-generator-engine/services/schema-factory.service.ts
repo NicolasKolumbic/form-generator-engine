@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DynamicForm } from '../composite-pattern';
-import { FormSchema, SchemaFactory } from '../abstractions';
+import { SchemaFactory } from '@form-generator-engine/abstractions/public';
+import { FormSchema } from '@form-generator-engine/abstractions/schemas';
 
 @Injectable()
 export class SchemaFactoryService implements SchemaFactory<JSONValue> {

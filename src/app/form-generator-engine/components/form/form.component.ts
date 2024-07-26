@@ -3,12 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DynamicForm } from '@form-generator-engine/composite-pattern';
-import { DynamicComponent } from '@form-generator-engine/abstractions';
 import { FactoryComponent } from '@form-generator-engine/abstractions/internal';
 import { TemplateFactoryComponent } from '../template-factory/template-factory.component';
 

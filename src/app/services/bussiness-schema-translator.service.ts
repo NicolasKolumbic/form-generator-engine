@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SchemaFactory } from '@form-generator-engine/abstractions';
+import { SchemaFactory } from '@form-generator-engine/abstractions/public';
 import { FormSchema } from '@form-generator-engine/abstractions/schemas';
 import { DynamicForm } from '@form-generator-engine/composite-pattern';
 

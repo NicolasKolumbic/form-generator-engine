@@ -3,13 +3,11 @@ import { Subject } from 'rxjs';
 import { Controls } from '../helpers';
 import { Question } from './question';
 import { FormEngineComponent } from '../typing/form-engine-component';
-import {
-  DynamicComponent,
-  QuestionBaseComponent,
-  UpdateField,
-  QuestionControlSchema,
-} from '../abstractions';
+
 import { BaseElement } from './base-element';
+import { DynamicComponent } from '@form-generator-engine/abstractions/internal';
+import { QuestionBaseComponent, UpdateField } from '@form-generator-engine/abstractions/public';
+import { QuestionControlSchema } from '@form-generator-engine/abstractions/schemas';
 
 export class QuestionControl
   extends BaseElement

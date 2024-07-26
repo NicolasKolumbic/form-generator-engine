@@ -1,5 +1,5 @@
+import { Metadata, HtmlFormControl } from '@form-generator-engine/abstractions/internal';
 import { Subject } from 'rxjs';
-import { HtmlFormControl, Metadata } from '../abstractions';
 
 export abstract class BaseElement implements Metadata, HtmlFormControl {
   #metadata?: Map<string, JSONValue | null>;

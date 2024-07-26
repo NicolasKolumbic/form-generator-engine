@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { QuestionBaseComponent } from '@form-generator-engine/abstractions';
 import { QuestionControl } from '@form-generator-engine/composite-pattern';
 import { OnyNumberSetting } from './only-number-setting.interface';
 import { InputNumberValidationBuilder } from './builder-pattern/input-number-validation-builder';
+import { QuestionBaseComponent } from '@form-generator-engine/abstractions/public';
 
 @Component({
   selector: 'app-only-number',

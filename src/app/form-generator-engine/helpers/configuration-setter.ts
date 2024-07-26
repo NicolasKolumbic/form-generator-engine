@@ -12,9 +12,6 @@ export function configurationSetter(setting: Partial<Setting>): Partial<Setting>
     if (!setting.overwrittenControls.panel) {
       setting.overwrittenControls.panel = controlsSettingBase.panel;
     }
-    if (!setting.overwrittenControls.panel) {
-      setting.overwrittenControls.panel = controlsSettingBase.panel;
-    }
     if (!setting.overwrittenControls.combobox) {
       setting.overwrittenControls.combobox = controlsSettingBase.combobox;
     }
@@ -23,9 +20,6 @@ export function configurationSetter(setting: Partial<Setting>): Partial<Setting>
     }
     if (!setting.overwrittenControls.checkbox) {
       setting.overwrittenControls.checkbox = controlsSettingBase.checkbox;
-    }
-    if (!setting.overwrittenControls.question) {
-      setting.overwrittenControls.question = controlsSettingBase.question;
     }
     if (!setting.overwrittenControls.question) {
       setting.overwrittenControls.question = controlsSettingBase.question;

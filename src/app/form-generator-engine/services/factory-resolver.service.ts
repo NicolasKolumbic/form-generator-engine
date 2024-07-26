@@ -1,9 +1,9 @@
 import { createComponent, EnvironmentInjector, Injectable, NgZone } from '@angular/core';
-import { DynamicComponent, HtmlFormControl } from '@form-generator-engine/abstractions';
 import { Controls } from '@form-generator-engine/helpers';
 import { FormEngineComponent } from '@form-generator-engine/typing/form-engine-component';
 import { FormSessionService } from './form-session.service';
 import { ComponentHostDirective } from '@form-generator-engine/directives/container.directive';
+import { DynamicComponent, HtmlFormControl } from '@form-generator-engine/abstractions/internal';
 
 enum InputNames {
   Page = 'page',

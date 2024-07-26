@@ -1,5 +1,5 @@
 import { Injectable, Type } from '@angular/core';
-import { ControlsSetting } from '../abstractions';
+import { ControlsSetting } from '@form-generator-engine/abstractions/internal';
 
 @Injectable()
 export class Setting {

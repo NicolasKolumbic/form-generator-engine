@@ -7,17 +7,15 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, ValidatorFn, Validators } from '@angular/forms';
-import {
-  DynamicComponent,
-  UpdateField,
-} from '@form-generator-engine/abstractions';
+
 import {
   Question,
   QuestionControl,
 } from '@form-generator-engine/composite-pattern';
 import { FormSessionService } from '@form-generator-engine/services/form-session.service';
-import { FactoryComponent } from '@form-generator-engine/abstractions/internal';
+import { DynamicComponent, FactoryComponent } from '@form-generator-engine/abstractions/internal';
 import { TemplateFactoryComponent } from '../template-factory/template-factory.component';
+import { UpdateField } from '@form-generator-engine/abstractions/public';
 
 @Component({
   selector: 'fge-question',

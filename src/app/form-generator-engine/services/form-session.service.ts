@@ -1,10 +1,11 @@
 import { Inject, Injectable, Type } from '@angular/core';
 import { Subject } from 'rxjs';
 import { SchemaFactoryService } from './schema-factory.service';
-import { UpdatedForm, FormSchema } from '../abstractions';
 import { DynamicForm } from '../composite-pattern';
 import { Controls } from '../helpers';
 import { Setting } from './setting';
+import { UpdatedForm } from '@form-generator-engine/abstractions/public';
+import { FormSchema } from '@form-generator-engine/abstractions/schemas';
 
 @Injectable()
 export class FormSessionService {
