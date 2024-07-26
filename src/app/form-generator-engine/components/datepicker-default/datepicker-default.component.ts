@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { QuestionBaseComponent } from '@form-generator-engine/abstractions/public';
 import { QuestionControl } from '@form-generator-engine/composite-pattern';
 
@@ -20,4 +20,13 @@ export class DatepickerDefaultComponent implements QuestionBaseComponent, OnInit
     this.isShow = !this.isShow;
   }
 
+  @HostListener('window:click', ['$event.target'])
+  private onWindowClick(target: HTMLElement) {
+    if (target && !target.matches('.date_picker_control')) {
+      this.isShow = false;
+    }
+  }
+
 }
+
+

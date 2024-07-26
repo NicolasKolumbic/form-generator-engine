@@ -1,3 +1,11 @@
+  :host {
+    position: absolute;
+    bottom: 0;
+    right:0;
+    z-index: 1000;
+    transform: translateY(100%);
+  }
+  
   #date_picker_calendar {
       min-height: fit-content;
       box-shadow: 10px 10px 40px rgba(0,0,0,0.2);
@@ -8,7 +16,7 @@
   #date, 
   #date_picker_calendar {
       border-radius: 15px;
-      background: var(--dark-input);
+      background: white;
       border: 2px solid var(--dark-border);
       width: 100%;
   }

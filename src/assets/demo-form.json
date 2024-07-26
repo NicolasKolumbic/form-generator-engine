@@ -57,6 +57,19 @@
                 ]
               },
               {
+                "name": "question-7",
+                "componentType": 4,
+                "questionId": 7,
+                "questionText": "When is your birthday?",
+                "elements": [
+                  {
+                    "componentType": 11,
+                    "name": "question-ctrol-7",
+                    "label": "Birthday"
+                  }
+                ]
+              },
+              {
                 "name": "question-4",
                 "componentType": 4,
                 "questionId": 4,
@@ -100,19 +113,6 @@
                     "componentType": 10,
                     "name": "question-ctrol-6",
                     "label": "ID"
-                  }
-                ]
-              },
-              {
-                "name": "question-7",
-                "componentType": 4,
-                "questionId": 7,
-                "questionText": "When is your birthday?",
-                "elements": [
-                  {
-                    "componentType": 11,
-                    "name": "question-ctrol-7",
-                    "label": "Birthday"
                   }
                 ]
               }

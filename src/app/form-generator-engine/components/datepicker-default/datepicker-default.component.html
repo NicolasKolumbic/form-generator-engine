@@ -1,7 +1,15 @@
 <div id="date_picker">
-    <div id="date_picker_input" [class.showCal]="isShow">
-      <label>Datepicker</label>
-      <input type="text" id="date" [class.onFocus]="!isShow" readonly (click)="showCalendar()" />
-      <app-calendar-default *ngIf="isShow" />
-    </div>
+  <div id="date_picker_input" [class.showCal]="isShow">
+    <label [attr.for]="question.name" class="pr-2">{{ question.label }}</label>
+    <input
+      type="text"
+      [attr.id]="question.name"
+      class="date_picker_control border-2 outline-none pl-2 h-8"
+      [class.onFocus]="!isShow"
+      [formControl]="question.control"
+      readonly
+      (click)="showCalendar()"
+    />
+    <app-calendar-default *ngIf="isShow" />
+  </div>
 </div>
