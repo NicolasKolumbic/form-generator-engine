@@ -7,10 +7,10 @@ export class Character {
 
   #regex!: RegExp;
 
-  constructor(value: string, type: string, position: number) {
+  constructor(value: string, position: number) {
     this.value = value;
     this.position = position;
-    this.setType(type);
+    this.setType(value);
   }
 
   validate(value: string): boolean {

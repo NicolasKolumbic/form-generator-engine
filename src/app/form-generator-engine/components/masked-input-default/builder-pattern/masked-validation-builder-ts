@@ -1,9 +1,0 @@
-import { Injectable } from "@angular/core";
-
-@Injectable()
-export class MaskValidationBuilder {
-    
-    validate(value: string, key: string, expression: RegExp, startCursorPosition:number, endCursorPosition: number ): void {
-        
-    }
-}

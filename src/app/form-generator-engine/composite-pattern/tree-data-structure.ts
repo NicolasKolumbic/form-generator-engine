@@ -64,4 +64,23 @@ export abstract class TreeDataStructure extends BaseElement {
     this.#lastChild = lastChild;
     return this;
   }
+
+  query<T>(fn: (element: TreeDataStructure) => boolean, element?: TreeDataStructure ): T | undefined {
+    const node = element || this;
+    let result = fn(node as TreeDataStructure);
+
+    if(result) {
+      return node as T;
+    }
+
+    if(node.hasNext()) {
+      return this.query(fn, node.right as TreeDataStructure);
+    }
+
+    if(node.hasfirstChild()) {
+      return this.query(fn, node.firstChild as TreeDataStructure);
+    } 
+
+    return undefined;
+  }
 }

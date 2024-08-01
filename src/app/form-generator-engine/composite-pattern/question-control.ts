@@ -28,6 +28,7 @@ export class QuestionControl
   #maxlength: number;
   #pattern: RegExp | null;
   #placeholder: string;
+  #mask: string;
 
   #update: Subject<UpdateField>;
   #error: Subject<string>;
@@ -48,7 +49,8 @@ export class QuestionControl
       minLength,
       pattern,
       placeholder,
-      isVisible
+      isVisible,
+      mask
     }: QuestionControlSchema,
     parent: Question
   ) {
@@ -66,6 +68,7 @@ export class QuestionControl
     this.#maxlength = maxLength ?? Infinity;
     this.#pattern = pattern ?? null;
     this.#placeholder = placeholder ?? '';
+    this.#mask = mask ?? '';
     this.#update = new Subject();
     this.#error = new Subject();
   }
@@ -124,6 +127,10 @@ export class QuestionControl
 
   get placeholder(): string {
     return this.#placeholder;
+  }
+
+  get mask(): string {
+    return this.#mask;
   }
 
   updateValue<T>(value: T): void {

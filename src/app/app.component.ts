@@ -3,6 +3,7 @@ import { JsonEditorComponent, JsonEditorOptions } from 'ang-jsoneditor';
 import { DemoDataService } from './services/demo-data.service';
 import { UpdatedForm } from '@form-generator-engine/abstractions/public';
 import { PageSchema } from '@form-generator-engine/abstractions/schemas';
+import { TreeDataStructure } from '@form-generator-engine/composite-pattern/tree-data-structure';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,19 @@ export class AppComponent implements OnInit {
   }
 
   updateForm(updatedValue: UpdatedForm) {
-    console.log(updatedValue);
-    updatedValue.form.addSchemaElement(this.page);
+    console.time('Uno')
+    const algo = updatedValue.form.query((element: TreeDataStructure) => {
+      return element.name === 'question-5'
+    });
+    console.timeEnd('Uno')
+    console.log(algo)
+
+    console.time('Two')
+    const algo2 = updatedValue.form.queryArray((element: TreeDataStructure) => {
+      return element.name === 'question-5'
+    });
+    console.timeEnd('Two')
+    console.log(algo2)
+
   }
 }

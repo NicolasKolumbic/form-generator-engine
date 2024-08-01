@@ -12,6 +12,8 @@ import { ElementManager } from './element-manager';
 import { DynamicComponent } from '@form-generator-engine/abstractions/internal';
 import { UpdatedForm, UpdateField } from '@form-generator-engine/abstractions/public';
 import { FormSchema, PageSchema, QuestionSchema } from '@form-generator-engine/abstractions/schemas';
+import { BaseElement } from './base-element';
+import { TreeDataStructure } from './tree-data-structure';
 
 export class DynamicForm
   extends ElementManager<Page, null, FormSchema>
@@ -66,6 +68,24 @@ export class DynamicForm
       questionMetadata: question.metadata(),
       form: this
     } as UpdatedForm);
+  }
+
+  queryArray(fn: (element: TreeDataStructure) => boolean, element?: any) {
+    let result = false;
+    let nodes: any[] = element ? element.elements : this.elements;
+    let counter: number = 0;
+    let value;
+    while(counter < nodes.length && value === undefined) {
+      result = fn(nodes[counter]);
+      if(result) {
+        value = nodes[counter];
+      } else {
+        this.queryArray(fn, nodes[counter]);
+      }
+      counter++;
+    }
+
+    return value;
   }
 
 

@@ -112,6 +112,7 @@
                   {
                     "componentType": 10,
                     "name": "question-ctrol-6",
+                    "mask": "00-000-000",
                     "label": "ID"
                   }
                 ]

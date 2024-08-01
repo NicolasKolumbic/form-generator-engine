@@ -13,4 +13,5 @@ export interface QuestionControlSchema extends Schema {
   maxLength?: number;
   pattern?: RegExp;
   placeholder?: string;
+  mask?: string;
 }

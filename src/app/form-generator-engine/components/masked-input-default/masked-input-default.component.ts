@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { QuestionBaseComponent } from '@form-generator-engine/abstractions/public/question-base-component';
 import { QuestionControl } from '@form-generator-engine/composite-pattern';
 
@@ -9,10 +9,12 @@ import { QuestionControl } from '@form-generator-engine/composite-pattern';
 })
 export class MaskedInputDefaultComponent implements QuestionBaseComponent, OnInit{
   @Input() question!: QuestionControl;
+
+  @ViewChild('field', { static: true }) field!: ElementRef<HTMLInputElement>;
   
   ngOnInit(): void {
-    this.question.updateValue("00-0000000-0");
-    this.question.control.setValue("00-0000000-0")
+    this.question.updateValue(this.question.mask);
+    this.question.control.setValue(this.question.mask);
   }
 
 }
